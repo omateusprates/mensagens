@@ -36,7 +36,7 @@ app.post('/reply', express.json(), (req,res) => {
         .create({
             from: 'whatsapp:+14155238886',
             body: 'Hello there!',
-            to: 'whatsapp:+5534992298475'
+            to: 'whatsapp:'+ dados.tel
         })
         .then(message => console.log(message.sid));
 
