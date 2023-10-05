@@ -2,6 +2,9 @@
 
 *.txt
 
+*.env
+
+node_modules/
+
 variaveis.js
 
-*/
