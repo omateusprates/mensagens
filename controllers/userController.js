@@ -11,13 +11,6 @@ const sendMessage = async(req,res)=>{
 
     try {
 
-        // client.messages.create({
-        //     body: req.body.message,
-        //     from: 'whatsapp:+14155238886',
-        //     to: 'whatsapp:'+req.body.to
-        // })
-        // .then(message => console.log("Message sent successfully"));
-
         console.log(req.body.Body);
 
         var messageToSend = " ";
@@ -35,7 +28,7 @@ const sendMessage = async(req,res)=>{
             })
             .then(message => console.log("Message SID: " +message.sid));
 
-        res.send('send via callback');
+            res.send('send via callback');
 
 
     } catch (error) {
