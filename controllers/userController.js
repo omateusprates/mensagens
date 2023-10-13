@@ -22,7 +22,7 @@ const sendMessage = async(req,res)=>{
 
         client.messages
             .create({
-                from: 'whatsapp:+14155238886',
+                from: req.body.To,
                 body: messageToSend,
                 to: req.body.From
             })
