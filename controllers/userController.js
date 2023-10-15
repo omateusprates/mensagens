@@ -21,7 +21,7 @@ const sendMessage = async(req,res)=>{
 
         if(Object.keys(conversationsContext).length === 0)
         {
-            messageToSend = "Olá, " +req.body.ProfileName;
+            messageToSend = "Primeira mensagem";
             conversationsContext.messageToSend = messageToSend;
             conversations[senderNumber] = conversationsContext;
 
