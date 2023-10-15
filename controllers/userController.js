@@ -12,27 +12,31 @@ const sendMessage = async(req,res)=>{
 
     try {
 
-        let conversationsContext = conversations[req.body.From] || {};
-        var messageToSend = "";
+        const myNumber = req.body.To;
+        const senderNumber = req.body.From;
+        const messageBody = req.body.Body;
+
+        let conversationsContext = conversations[senderNumber] || {};
+        let messageToSend = "";
 
         if(Object.keys(conversationsContext).length === 0)
         {
             messageToSend = "Olá, " +req.body.ProfileName;
             conversationsContext.messageToSend = messageToSend;
-            conversations[req.body.From] = conversationsContext;
+            conversations[senderNumber] = conversationsContext;
 
             client.messages
             .create({
-                from: req.body.To,
+                from: myNumber,
                 body: messageToSend,
-                to: req.body.From
+                to: senderNumber
             })
             .then(message => console.log("Message SID: " +message.sid));
 
             res.send('send via callback');
         }
 
-        console.log(req.body.Body);          
+        console.log(messageBody);          
 
     } catch (error) {
         return res.status(400).json({ success: false,msg:error.message });
