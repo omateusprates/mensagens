@@ -6,21 +6,22 @@ const twilio = require('twilio');
 
 const client = twilio(accountSid, authToken);
 
+const conversations = {};
 
 const sendMessage = async(req,res)=>{
 
     try {
 
-        console.log(req.body.Body);
+        let conversationsContext = conversations[req.body.From] || {};
+        var messageToSend = "";
 
-        var messageToSend = " ";
-
-        if(req.body.Body == "Tá ocupado?")
+        if(Object.keys(conversationsContext).length === 0)
         {
-            messageToSend = "Tô nada, fala aí"    
-        }
+            messageToSend = "Olá, " +req.body.ProfileName;
+            conversationsContext.messageToSend = messageToSend;
+            conversations[req.body.From] = conversationsContext;
 
-        client.messages
+            client.messages
             .create({
                 from: req.body.To,
                 body: messageToSend,
@@ -29,7 +30,9 @@ const sendMessage = async(req,res)=>{
             .then(message => console.log("Message SID: " +message.sid));
 
             res.send('send via callback');
+        }
 
+        console.log(req.body.Body);          
 
     } catch (error) {
         return res.status(400).json({ success: false,msg:error.message });
