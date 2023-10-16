@@ -24,7 +24,7 @@ const sendMessage = async(req,res)=>{
             messageToSend = "Primeira mensagem";
             conversationsContext.messageToSend = messageToSend;
             conversations[senderNumber] = conversationsContext;
-
+            
             client.messages
             .create({
                 from: myNumber,
